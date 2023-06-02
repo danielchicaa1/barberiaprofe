@@ -1,4 +1,5 @@
 import 'animate.css'
+import { Link } from "react-router-dom"
 export function Menu() {
 
     return (
@@ -19,7 +20,7 @@ export function Menu() {
                                 <a className="nav-link active" aria-current="page" href="#">Home</a>
                             </li>
                             <li className="nav-item">
-                                <a className="nav-link" href="#">Features</a>
+                                <Link className="nav-link" to="/reservas">VER RESERVAS</Link>
                             </li>
                             <li className="nav-item">
                                 <a className="nav-link" href="#">Pricing</a>
