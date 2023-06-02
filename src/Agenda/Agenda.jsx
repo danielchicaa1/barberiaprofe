@@ -1,4 +1,5 @@
 import { useState,useEffect } from "react"
+import { agendarCita } from "../services/servicioAgendar"
 export function Agenda() {
 
     const[nombre, setNombre]=useState('')
@@ -9,16 +10,29 @@ export function Agenda() {
 
     const [errores, setErroress] = useState({})
     const [data, setData] = useState({})
+    const [envioFormulario,setEnvioFormulario]=useState(false)
 
     useEffect(() => {
         console.log(errores)
         console.log(Object.keys(errores))
         if(Object.keys(errores).length>0){
             console.log("lanzo el error")
-        }else{
-            console.log("voy al servicio")
+        }else if(envioFormulario){
+            let datosEnvio={
+                nombre,
+                correo,
+                telefono,
+                hora,
+                dia,
+                tipo:2
+            }
+            console.log(datosEnvio)
+            agendarCita(datosEnvio)
+            .then(function(respuesta){
+                console.log(respuesta)
+            })
         }
-      }, [errores]);
+      }, [errores,envioFormulario]);
 
     function validarFormulario(evento){
 
@@ -42,6 +56,9 @@ export function Agenda() {
         }
 
         setErroress(listaErrores)
+        if(Object.keys(listaErrores).length==0){
+           setEnvioFormulario(true)
+        }
 
 
 
